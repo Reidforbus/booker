@@ -1,17 +1,18 @@
 <title>Booking calendar</title>
 <h1>Booking calendar</h1>
 <p>{{ motd }}</p>
-{% if session.user %}
-<p>You're logged in as {{session.user}}  <a href="/logout">Log out</a></p>
+{% if session.username %}
+<p>You're logged in as {{session.username}}  <a href="/logout">Log out</a></p>
 {% else %}
 <div>
     <form action="/login" method="POST">
-        Email:     <input type="email" name="email">
+        Username:     <input type="text" name="username">
         <br>
         Password:  <input type="password" name="pwd">
         <br>
         <input  type="submit" value="Log In">
     </form>
+    <p>Don't have an account? <a href="/register">Register</a></p>
 </div>
 {% endif %}
 

@@ -1,15 +1,19 @@
 from flask import Flask
 from flask import redirect, render_template, request, session
 from os import getenv
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import text
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
+db = SQLAlchemy(app)
 
 
 @app.route("/")
-def index():
-    return render_template("index.html", motd="Book your time here")
+def index(motd="Book your time here"):
+    return render_template("index.html", motd=motd)
 
 
 @app.route("/login", methods=["GET"])
@@ -41,6 +45,8 @@ def register():
 def handleregister():
     name = request.form["name"]
     username = request.form["username"]
-    pwd = request.form["pwd"]
-    session["username"] = username
+    pwd_hash = generate_password_hash(request.form["pwd"])
+    sql = "INSERT INTO users (username, pwd, name) VALUES (:username, :pwd, :name)"
+    db.session.execute(text(sql), {"username":username, "pwd":pwd_hash, "name":name})
+    db.session.commit()
     return redirect("/")

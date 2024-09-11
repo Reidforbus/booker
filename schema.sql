@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS users;
 -- Create tables
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    username TEXT,
+    username TEXT NOT NULL UNIQUE,
     pwd TEXT,
     name TEXT,
     admin BOOLEAN DEFAULT FALSE,

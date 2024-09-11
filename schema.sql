@@ -11,8 +11,8 @@ CREATE TABLE users (
     username TEXT,
     pwd TEXT,
     name TEXT,
-    admin BOOLEAN,
-    active BOOLEAN
+    admin BOOLEAN DEFAULT FALSE,
+    active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE service_items (
@@ -21,7 +21,7 @@ CREATE TABLE service_items (
     description TEXT,
     dur INT, --TODO: change to time interval later
     price NUMERIC,
-    active BOOLEAN
+    active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE open_hours (
@@ -33,8 +33,8 @@ CREATE TABLE open_hours (
 CREATE TABLE booking_info (
     booking_id SERIAL PRIMARY KEY,
     msg TEXT,
-    user_id SERIAL,
-    active BOOLEAN,
+    user_id INT NOT NULL,
+    active BOOLEAN DEFAULT TRUE,
 
     CONSTRAINT fk_user
     FOREIGN KEY(user_id)

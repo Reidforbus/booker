@@ -2,9 +2,12 @@
 <h1>Booking Calendar</h1>
 <h2>Register a new user account</h2>
 <form action="/register" method="POST">
-    Your name: <input type="text" name="name">
-    Username: <input type="text" name="username">
-    Password: <input type="password" name="pwd">
+    <label for="name">Your name:</label><br>
+    <input type="text" id="name" name="name"><br>
+    <label for="username">Choose a username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="pwd">Choose a password:</label><br>
+    <input type="password" id="pwd" name="pwd"><br>
     <input type="submit" value="Register"> <a href="/">Cancel</a>
 </form>
 

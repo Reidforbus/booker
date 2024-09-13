@@ -1,5 +1,6 @@
-<title>Register new user</title>
-<h1>Booking Calendar</h1>
+{% extends "layout.html" %}
+{% block title %}Register new user{% endblock %}
+{% block content %}
 <h2>Register a new user account</h2>
 <form action="/register" method="POST">
     <label for="name">Your name:</label><br>
@@ -10,4 +11,4 @@
     <input type="password" id="pwd" name="pwd"><br>
     <input type="submit" value="Register"> <a href="/">Cancel</a>
 </form>
-
+{% endblock %}

@@ -1,0 +1,11 @@
+<!doctype html>
+<link rel="stylesheet" href="{{url_for("static", filename="layout.css")}}">
+<meta name="viewport" content="width=device-width, initial-scale-1">
+<body>
+    <title>{% block title %}{% endblock %}</title>
+    <h1>Late's bike service</h1>
+    {% if session.admin==True %}Admin access{% endif %}
+    <a href="/">Frontpage</a>{% if request.path!="/register" %}{% include "login.html" %}{% endif %}
+    <hr>
+    {% block content %}{% endblock %}
+</body>

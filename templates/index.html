@@ -1,19 +1,8 @@
-<title>Booking calendar</title>
-<h1>Booking calendar</h1>
-<p>{{ motd }}</p>
-{% if session.username %}
-<p>You're logged in as {{session.username}}  <a href="/logout">Log out</a></p>
-{% else %}
-<div>
-    <form action="/login" method="POST">
-        Username:     <input type="text" name="username">
-        <br>
-        Password:  <input type="password" name="pwd">
-        <br>
-        <input  type="submit" value="Log In">
-    </form>
-    <p>Don't have an account? <a href="/register">Register</a></p>
-</div>
-{% endif %}
-
-<div>calendar goes here</div>
+{% extends "layout.html" %}
+{% block title %}Late's bike service{% endblock %}
+{% block content %}
+Welcome to Late's bike service!<br>
+<br>
+We are a fictional virtual bikeshop and through this site you can book your bike a service appointment.<br>
+You may browse our service options on our <b>services</b> page. If you wish to book a service, please log in first.
+{% endblock %}

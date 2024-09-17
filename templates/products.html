@@ -1,0 +1,12 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Services{% endblock %}
+{% block content %}
+<div id="products">
+    {% for product in products %}
+        <div>
+            {{ product.name }}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

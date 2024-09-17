@@ -68,6 +68,11 @@ def error():
     return render_template("error.html")
 
 
+@app.route("/products")
+def products():
+    return render_template("products.html", products=[{"name": "ABC"}, {"name": "XYZ"}])
+
+
 def is_admin():
     if session["username"]:
         return session["admin"]

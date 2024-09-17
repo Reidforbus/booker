@@ -1,5 +1,5 @@
 from app import app
-from db import db
+from db import db, validate_login
 from logic import is_admin
 from flask import redirect, render_template, request, session
 from sqlalchemy.sql import text
@@ -16,10 +16,8 @@ def login():
     if request.method == "GET":
         return redirect("/")
     username = request.form["username"]
-    # password = request.form["pwd"]
-    # TODO: validate credentials
-    query = text("SELECT admin FROM users WHERE username=:username")
-    result = db.session.execute(query, {"username": username}).fetchone()
+    password = request.form["pwd"]
+    result = validate_login(username, password)
     if result is not None:
         session["username"] = username
         session["admin"] = result.admin
@@ -35,6 +33,8 @@ def logout():
 
 @app.route("/register", methods=["GET"])
 def register():
+    if "username" in session:
+        return render_template("error.html", errmsg="You are already logged in!")
     return render_template("register.html")
 
 
@@ -42,7 +42,7 @@ def register():
 def handleregister():
     username = request.form["username"]
     if username == "":
-        return redirect("/error")
+        return render_template("error.html", errmsg="Username cannot be empty!")
     sameusrnm = text("SELECT COUNT(*) FROM users WHERE username=:username")
     result = db.session.execute(sameusrnm, {"username": username}).fetchone()
     app.logger.debug(result[0])
@@ -66,3 +66,13 @@ def products():
     query = text("SELECT * FROM service_items WHERE active=TRUE")
     result = db.session.execute(query).fetchall()
     return render_template("products.html", products=result)
+
+
+@app.route("/products/<int:id>/book")
+def book(id):
+    if "username" in session:
+        query = text("SELECT * FROM service_items WHERE service_id=:id")
+        result = db.session.execute(query, {"id": id}).fetchone()
+        return render_template("booking.html", product=result)
+    else:
+        return render_template("error.html", errmsg="You must be logged in to book services")

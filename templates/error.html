@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}Error occured{% endblock %}
 {% block content %}
+{% if errmsg %}
+{{ errmsg }}
+{% else %}
 There was an error
+{% endif %}
 {% endblock %}

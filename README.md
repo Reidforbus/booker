@@ -10,7 +10,7 @@ The owner/admin is able to:
 
 A user/client is able to:
 - WIP Browse available services
-- WIP Book services and add messages bookings
-- WIP Check and edit their bookings
+- WIP Book services and add messages to bookings
+- WIP Review and edit their bookings
 
 My plan is to implement this application as a bike shop service scheduler

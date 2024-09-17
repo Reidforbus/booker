@@ -70,7 +70,9 @@ def error():
 
 @app.route("/products")
 def products():
-    return render_template("products.html", products=[{"name": "ABC"}, {"name": "XYZ"}])
+    query = text("SELECT * FROM service_items WHERE active=TRUE")
+    result = db.session.execute(query).fetchall()
+    return render_template("products.html", products=result)
 
 
 def is_admin():

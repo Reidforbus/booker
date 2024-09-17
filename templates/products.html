@@ -4,8 +4,11 @@
 {% block content %}
 <div id="products">
     {% for product in products %}
-        <div>
-            {{ product.name }}
+        <div class="product">
+            {{ product.name }}<br>
+            {{ product.description }}<br>
+            {{ product.dur }} min.<br>
+            {{ product.price }}€
         </div>
     {% endfor %}
 </div>

@@ -5,10 +5,17 @@
 <div id="products">
     {% for product in products %}
         <div class="product">
-            {{ product.name }}<br>
-            {{ product.description }}<br>
+            {{ product.name }}<br><br>
+            {{ product.description }}<br><br>
             {{ product.dur }} min.<br>
             {{ product.price }}€
+            {% if not session.username %}
+            <p>Log in to book a service</p><br>
+            {% else %}
+            <form action="products/{{ product.service_id }}/book" method="GET">
+                <input type="submit" value="Book service">
+            </form>
+            {% endif %}
         </div>
     {% endfor %}
 </div>

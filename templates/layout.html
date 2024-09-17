@@ -4,8 +4,15 @@
 <body>
     <title>{% block title %}{% endblock %}</title>
     <h1>Late's bike service</h1>
-    {% if session.admin==True %}Admin access{% endif %}
-    <a href="/">Frontpage</a>{% if request.path!="/register" %}{% include "login.html" %}{% endif %}
+    <div id="navbar">
+
+        {% if session.admin==True %}Admin access{% endif %}
+        <div id="links">
+
+            {% include "links.html" %}
+        </div>
+        {% if request.path!="/register" %}{% include "login.html" %}{% endif %}
+    </div>
     <hr>
     {% block content %}{% endblock %}
 </body>

@@ -3,6 +3,16 @@ body {
     max-width: 80em;
 }
 
-.login {
-    align: right;
+#navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+#calendar {
+    display: grid;
+}
+
+#products {
+    display: flex;
+    justify-content: space-around;
 }

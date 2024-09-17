@@ -30,14 +30,14 @@ def login():
     if result is not None:
         session["username"] = username
         session["admin"] = result.admin
-    return redirect("/")
+    return redirect(request.referrer)
 
 
 @app.route("/logout")
 def logout():
     del session["username"]
     del session["admin"]
-    return redirect("/")
+    return redirect(request.referrer)
 
 
 @app.route("/register", methods=["GET"])

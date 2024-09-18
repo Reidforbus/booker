@@ -13,4 +13,4 @@ A user/client is able to:
 - WIP Book services and add messages to bookings
 - WIP Review and edit their bookings
 
-My plan is to implement this application as a bike shop service scheduling app
+I will be implementing this application as a bike shop service scheduling app

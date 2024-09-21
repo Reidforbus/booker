@@ -1,4 +1,4 @@
-### Appointment booking tool
+## Appointment booking tool
 
 This repo holds my student project for the University of Helsinki course Tietokannat ja web-ohjelmointi
 
@@ -15,9 +15,9 @@ A user/client is able to:
 
 My plan is to implement this application as a bike shop service scheduler
 
-## Testing the project
+### Testing the project
 
-# Starting the project
+#### Starting the project
 
 To test this project you need to have at least Python3 and Postgresql installed.
 
@@ -45,7 +45,7 @@ To test this project you need to have at least Python3 and Postgresql installed.
 
 Now you can access the site at ```localhost:5000```
 
-# Testing the site
+#### Testing the site
 
 Currently (21.09.2024) on the site you can try:
 - Registering an account

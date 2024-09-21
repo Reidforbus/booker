@@ -4,12 +4,12 @@ This repo holds my student project for the University of Helsinki course Tietoka
 
 My plan is to create a appointment scheduling program where a business can provide services for their customers to book appointments for.
 The owner/admin is able to:
-- WIP Create different services with custom description and duration
+- WIP Create different services with a custom description and duration
 - WIP Set time windows within which services can be booked
 - WIP Manage active bookings
 
 A user/client is able to:
-- WIP Browse available services
+- Browse available services
 - WIP Book services and add messages to bookings
 - WIP Review and edit their bookings
 
@@ -40,14 +40,15 @@ To test this project you need to have at least Python3 and Postgresql installed.
     ```
 6. Create ```.env``` file with ```SECRET_KEY``` and ```DATABASE_URL``` as per course instructions
 7. Run ```start-pg.sh``` and in another terminal build database using ```psql < schema.sql``` 
+7,5. You can also add sample services with ```psql < testservices.sql```
 8. Run the flask server with ```flask run```
 
 Now you can access the site at ```localhost:5000```
 
 # Testing the site
 
-Currently (21.9.24) on the site you can try:
+Currently (21.09.2024) on the site you can try:
 - Registering an account
 - Logging in
-    - The server wont check passwords for now so you can log in as any valid user that is found in the database
+    - The server wont check passwords for now so you can log in as any valid user that you register into the database
 - Browse available services

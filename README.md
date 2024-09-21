@@ -40,7 +40,7 @@ To test this project you need to have at least Python3 and Postgresql installed.
     ```
 6. Create ```.env``` file with ```SECRET_KEY``` and ```DATABASE_URL``` as per course instructions
 7. Run ```start-pg.sh``` and in another terminal build database using ```psql < schema.sql``` 
-7,5. You can also add sample services with ```psql < testservices.sql```
+    - You can also add sample services with ```psql < testservices.sql```
 8. Run the flask server with ```flask run```
 
 Now you can access the site at ```localhost:5000```
@@ -50,5 +50,5 @@ Now you can access the site at ```localhost:5000```
 Currently (21.09.2024) on the site you can try:
 - Registering an account
 - Logging in
-    - The server wont check passwords for now so you can log in as any valid user that you register into the database
+    - The server won't check passwords for now so you can log in as any valid user that you register into the database
 - Browse available services

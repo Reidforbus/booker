@@ -18,8 +18,8 @@ def user_exists(username):
     return 1 == db.session.execute(query, {"username": username}).fetchone()[0]
 
 
-def add_user(username, pwd, name):
-    insertquery = "INSERT INTO users (username, pwd, name) VALUES (:username, :pwd, :name)"
+def add_user(username, pwd, name, admin):
+    insertquery = "INSERT INTO users (username, pwd, name, admin) VALUES (:username, :pwd, :name, :admin)"
     pwd_hash = generate_password_hash(pwd)
-    db.session.execute(text(insertquery), {"username":username, "pwd":pwd_hash, "name":name})
+    db.session.execute(text(insertquery), {"username":username, "pwd":pwd_hash, "name":name, "admin": admin})
     db.session.commit()

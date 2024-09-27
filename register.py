@@ -9,7 +9,12 @@ def handleregister(req):
             return render_template("error.html", errmsg="You are already logged in!")
         return render_template("register.html")
     username = req.form["username"]
-    if not logic.username_available(username):
-        return render_template("error.html", errmsg="username no good")
-    add_user(username, req.form["pwd"], req.form["name"])
+    password = req.form["pwd"]
+    valid, err = logic.username_available(username)
+    if not valid:
+        return render_template("error.html", errmsg=err)
+    valid, err = logic.password_valid(password)
+    if not valid:
+        return render_template("error.html", errmsg=err)
+    add_user(username, password, req.form["name"])
     return redirect("/")

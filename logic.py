@@ -15,7 +15,7 @@ def username_available(s):
         return False, "Username cannot be empty!"
     if db.user_exists(s):
         return False, "Username is already taken."
-    return True
+    return True, ""
 
 
 def password_valid(s):
@@ -23,4 +23,4 @@ def password_valid(s):
         return False, "Password cannot include whitespaces!"
     if s == "":
         return False, "Password cannot be empty!"
-    return True
+    return True, ""

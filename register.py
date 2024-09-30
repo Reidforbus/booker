@@ -16,5 +16,6 @@ def handleregister(req):
     valid, err = logic.password_valid(password)
     if not valid:
         return render_template("error.html", errmsg=err)
-    add_user(username, password, req.form["name"], req.form["admin"])
+    admin = True if req.form.get("admin") else False
+    add_user(username, password, req.form["name"], admin)
     return redirect("/")

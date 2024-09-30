@@ -2,9 +2,25 @@
 {% extends "layout.html" %}
 {% block title %}Booking {{ product.name }}{% endblock %}
 {% block content %}
+<div>
+    <p>Booking: {{ product.name }}.</p>
+    <p>{{ product.description }}</p>
+</div>
+<hr>
+<div id="weeknav" style="display:flex;justify-content:space-between;">
+    <p>prev week</p>
+    <p>this week</p>
+    <p>next week</p>
+</div>
 <div id=calendar>
-    {% for day in days %}
-        {{ day }}
+    {% for day in times %}
+    <div class="day">
+        {{ day.weekday }}
+        <hr>
+        {% for time in day.slots %}
+        <p>{{ time }}</p>
+        {% endfor %}
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

@@ -3,12 +3,8 @@
 {% block title %}Booking {{ product.name }}{% endblock %}
 {% block content %}
 <div id=calendar>
-    Mon
-    Tue
-    Wed
-    Thu
-    Fri
-    Sat
-    Sun
+    {% for day in days %}
+        {{ day }}
+    {% endfor %}
 </div>
 {% endblock %}

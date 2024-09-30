@@ -23,3 +23,8 @@ def add_user(username, pwd, name, admin):
     pwd_hash = generate_password_hash(pwd)
     db.session.execute(text(insertquery), {"username":username, "pwd":pwd_hash, "name":name, "admin": admin})
     db.session.commit()
+
+
+def get_service(id):
+    query = text("SELECT * FROM service_items WHERE service_id=:id")
+    return db.session.execute(query, {"id": id}).fetchone()

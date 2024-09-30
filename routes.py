@@ -2,6 +2,7 @@ from app import app
 from db import db
 import register
 import login
+import booking
 from flask import redirect, render_template, request, session
 from sqlalchemy.sql import text
 
@@ -41,10 +42,5 @@ def products():
 
 
 @app.route("/products/<int:id>/book")
-def book(id):
-    if "username" in session:
-        query = text("SELECT * FROM service_items WHERE service_id=:id")
-        result = db.session.execute(query, {"id": id}).fetchone()
-        return render_template("booking.html", product=result)
-    else:
-        return render_template("error.html", errmsg="You must be logged in to book services")
+def routebooking(id):
+    return booking.get_booking(request, id)

@@ -7,13 +7,15 @@
     <p>{{ product.description }}</p>
 </div>
 <hr>
-<div id="weeknav" style="display:flex;justify-content:space-between;">
+<div id="week_nav" 
+    style="display:flex; justify-content:space-between;"
+    >
     <p>prev week</p>
-    <p>this week</p>
+    <p>Week: {{week}}</p>
     <p>next week</p>
 </div>
 <div id=calendar>
-    {% for day in times %}
+    {% for day in dayslots %}
     <div class="day">
         {{ day.weekday }}
         <hr>

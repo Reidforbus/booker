@@ -44,3 +44,8 @@ def products():
 @app.route("/products/<int:id>/book")
 def routebooking(id):
     return booking.get_booking(request, id)
+
+
+@app.route("/products/<int:id>/book/<int:week>")
+def routebookingweek(id, week):
+    return booking.get_booking(request, id, week)

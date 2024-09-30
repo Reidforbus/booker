@@ -19,15 +19,15 @@ CREATE TABLE service_items (
     service_id SERIAL PRIMARY KEY,
     name TEXT,
     description TEXT,
-    dur INT, --TODO: change to time interval later
+    dur INTERVAL,
     price NUMERIC,
     active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE open_hours (
-    open INT, -- TODO: change to time later
-    close INT, -- TODO: change to time later
-    day INT --TODO: change to date later
+    open TIME,
+    close TIME,
+    day DATE
 );
 
 CREATE TABLE booking_info (
@@ -44,8 +44,8 @@ CREATE TABLE booking_info (
 CREATE TABLE bookings (
     booking_id INT,
     service_id INT,
-    time INT, --TODO: change to time later
-    day INT, --TODO: change to date later
+    time TIME,
+    day DATE,
 
     CONSTRAINT fk_booking
     FOREIGN KEY(booking_id)

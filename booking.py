@@ -38,3 +38,7 @@ def sampletimes():
 
 def get_free_slots(start_date, duration):
     print(start_date, duration)
+    for offset in range(7):
+        date = start_date + datetime.timedelta(days=offset)
+        opening_hours = db.get_hours(date)
+        taken_times = db.get_bookings(date)

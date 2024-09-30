@@ -21,10 +21,20 @@ def user_exists(username):
 def add_user(username, pwd, name, admin):
     insertquery = "INSERT INTO users (username, pwd, name, admin) VALUES (:username, :pwd, :name, :admin)"
     pwd_hash = generate_password_hash(pwd)
-    db.session.execute(text(insertquery), {"username":username, "pwd":pwd_hash, "name":name, "admin": admin})
+    db.session.execute(text(insertquery), {"username": username, "pwd": pwd_hash, "name": name, "admin": admin})
     db.session.commit()
 
 
 def get_service(id):
     query = text("SELECT * FROM service_items WHERE service_id=:id")
     return db.session.execute(query, {"id": id}).fetchone()
+
+
+def get_bookings(date):
+    query = text("SELECT bookings.service_id, dur, time FROM bookings JOIN service_items ON bookings.service_id = service_items.service_id WHERE day=:date")
+    return db.session.execute(query, {"date": date}).fetchall()
+
+
+def get_hours(date):
+    query = text("SELECT open, close FROM open_hours WHERE day=:date")
+    return db.session.execute(query, {"date": date}).fetchone()

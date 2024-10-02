@@ -31,7 +31,7 @@ def get_service(id):
 
 
 def get_bookings(date):
-    query = text("SELECT bookings.service_id, dur, time FROM bookings JOIN service_items ON bookings.service_id = service_items.service_id WHERE day=:date")
+    query = text("SELECT bookings.service_id, dur, time FROM bookings JOIN service_items ON bookings.service_id = service_items.service_id WHERE day=:date ORDER BY time")
     return db.session.execute(query, {"date": date}).fetchall()
 
 

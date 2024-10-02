@@ -22,6 +22,7 @@ def get_booking(req, id):
     monday = date - datetime.timedelta(days=date.weekday())
 
     free_slots = get_free_slots(monday, service[3])
+    print("Free slots:", free_slots)
     return render_template("booking.html", product=service, dayslots=sampletimes(), week=date.isocalendar()[1])
 
 
@@ -36,9 +37,15 @@ def sampletimes():
     return times
 
 
-def get_free_slots(start_date, duration):
+def get_free_slots(start_date: datetime.date, duration: datetime.timedelta):
     print(start_date, duration)
+    dayslots = []
     for offset in range(7):
+        day = {}
         date = start_date + datetime.timedelta(days=offset)
         opening_hours = db.get_hours(date)
         taken_times = db.get_bookings(date)
+        print("Day:", offset, opening_hours, taken_times)
+
+        dayslots.append(day)
+    return dayslots

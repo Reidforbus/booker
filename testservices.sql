@@ -13,3 +13,5 @@ INSERT INTO booking_info (user_id, msg) VALUES (100, 'Sample booking 1');
 INSERT INTO bookings (booking_id, service_id, time, day) VALUES (1, 1, '12:00', '2024-09-30');
 INSERT INTO bookings (booking_id, service_id, time, day) VALUES (1, 2, '13:00', '2024-09-30');
 INSERT INTO bookings (booking_id, service_id, time, day) VALUES (1, 3, '15:00', '2024-09-30');
+--sample hours
+INSERT INTO open_hours (open, close, day) VALUES ('10:00','18:00', '2024-09-30')

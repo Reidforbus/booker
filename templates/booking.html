@@ -19,9 +19,18 @@
     <div class="day">
         {{ day.weekday }}
         <hr>
-        {% for time in day.slots %}
-        <p>{{ time }}</p>
-        {% endfor %}
+        <div
+            >
+            {% if day.open %}
+            {% for time in day.slots %}
+            <div class="slot">
+            <p>{{ time[0].strftime("%H:%M") }} - {{ time[1].strftime("%H:%M") }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Closed for the day</p>
+            {% endif %}
+        </div>
     </div>
     {% endfor %}
 </div>

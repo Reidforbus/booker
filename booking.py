@@ -21,7 +21,7 @@ def get_booking(req, id):
             return render_template("error.html", errmsg="Date is not valid")
     monday = date - datetime.timedelta(days=date.weekday())
 
-    free_slots = get_free_slots(monday, service[3])
+    free_slots = get_weeks_free_slots(monday, service[3])
     print("Free slots:", free_slots)
     return render_template("booking.html", product=service, dayslots=sampletimes(), week=date.isocalendar()[1])
 
@@ -37,37 +37,40 @@ def sampletimes():
     return times
 
 
-def get_free_slots(start_date: datetime.date, duration: datetime.timedelta):
-    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+def get_weeks_free_slots(start_date: datetime.date, duration: datetime.timedelta):
     dayslots = []
-    for offset in range(7):
-        day = {}
-        date = start_date + datetime.timedelta(days=offset)
-        day["weekday"] = weekdays[date.weekday()]
-        day["slots"] = []
-        opening_hours = db.get_hours(date)
-        if not opening_hours:
-            dayslots.append(day)
-            continue
-        taken_times = db.get_bookings(date)
-        print("Day:", offset, opening_hours, taken_times)
-
-        block_size = datetime.timedelta(minutes=20)
-        start = datetime.datetime.combine(date, opening_hours[0])
-        close = datetime.datetime.combine(date, opening_hours[1])
-        j = 0
-
-        while start + duration <= close:
-            end = start + duration
-            if len(taken_times) > 0 and j < len(taken_times):
-                if end.time() <= taken_times[j][2]:
-                    day["slots"].append((start.time(), end.time()))
-                else:
-                    start = datetime.datetime.combine(date, taken_times[j][2]) + taken_times[j][1]
-                    j += 1
-                    continue
-            else:
-                day["slots"].append((start.time(), end.time()))
-            start += block_size
-        dayslots.append(day)
+    for day in range(7):
+        dayslots.append(get_free_slots(start_date + datetime.timedelta(days=day), duration))
     return dayslots
+
+
+def get_free_slots(date, duration):
+    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    day = {}
+    day["weekday"] = weekdays[date.weekday()]
+    day["slots"] = []
+    opening_hours = db.get_hours(date)
+    if not opening_hours:
+        day["open"] = False
+        return day
+    day["open"] = True
+    taken_times = db.get_bookings(date)
+
+    block_size = datetime.timedelta(minutes=20)
+    start = datetime.datetime.combine(date, opening_hours[0])
+    close = datetime.datetime.combine(date, opening_hours[1])
+    j = 0
+
+    while start + duration <= close:
+        end = start + duration
+        if len(taken_times) > 0 and j < len(taken_times):
+            if end.time() <= taken_times[j][2]:
+                day["slots"].append((start.time(), end.time()))
+            else:
+                start = datetime.datetime.combine(date, taken_times[j][2]) + taken_times[j][1]
+                j += 1
+                continue
+        else:
+            day["slots"].append((start.time(), end.time()))
+        start += block_size
+    return day

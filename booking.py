@@ -22,19 +22,7 @@ def get_booking(req, id):
     monday = date - datetime.timedelta(days=date.weekday())
 
     free_slots = get_weeks_free_slots(monday, service[3])
-    print("Free slots:", free_slots)
-    return render_template("booking.html", product=service, dayslots=sampletimes(), week=date.isocalendar()[1])
-
-
-def sampletimes():
-    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    times = []
-    for day in weekdays:
-        time = {}
-        time["weekday"] = day
-        time["slots"] = [1, 2, 3, 4]
-        times.append(time)
-    return times
+    return render_template("booking.html", product=service, dayslots=free_slots, week=date.isocalendar()[1])
 
 
 def get_weeks_free_slots(start_date: datetime.date, duration: datetime.timedelta):
@@ -49,6 +37,7 @@ def get_free_slots(date, duration):
     day = {}
     day["weekday"] = weekdays[date.weekday()]
     day["slots"] = []
+    day["date"] = date
     opening_hours = db.get_hours(date)
     if not opening_hours:
         day["open"] = False

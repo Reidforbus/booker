@@ -3,6 +3,7 @@ from os import getenv
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from werkzeug.security import generate_password_hash
+import datetime
 
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
@@ -32,9 +33,18 @@ def get_service(id):
 
 def get_bookings(date):
     query = text("SELECT bookings.service_id, dur, time FROM bookings JOIN service_items ON bookings.service_id = service_items.service_id WHERE day=:date ORDER BY time")
-    return db.session.execute(query, {"date": date}).fetchall()
+    result = db.session.execute(query, {"date": date}).fetchall()
+    bookings = []
+    for booking in result:
+        bookings.append((booking[0], booking[1], datetime.datetime.combine(date, booking[2])))
+    return bookings
 
 
 def get_hours(date):
     query = text("SELECT open, close FROM open_hours WHERE day=:date")
-    return db.session.execute(query, {"date": date}).fetchone()
+    result = db.session.execute(query, {"date": date}).fetchone()
+    if result is None:
+        return None
+    open = datetime.datetime.combine(date, result[0])
+    close = datetime.datetime.combine(date, result[1])
+    return open, close

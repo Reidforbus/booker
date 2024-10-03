@@ -43,23 +43,23 @@ def get_free_slots(date, duration):
         day["open"] = False
         return day
     day["open"] = True
-    taken_times = db.get_bookings(date)
 
+    taken_times = db.get_bookings(date)
     block_size = datetime.timedelta(minutes=20)
-    start = datetime.datetime.combine(date, opening_hours[0])
-    close = datetime.datetime.combine(date, opening_hours[1])
+    start = opening_hours[0]
+    close = opening_hours[1]
     j = 0
 
     while start + duration <= close:
         end = start + duration
         if len(taken_times) > 0 and j < len(taken_times):
-            if end.time() <= taken_times[j][2]:
-                day["slots"].append((start.time(), end.time()))
+            if end <= taken_times[j][2]:
+                day["slots"].append((start, end))
             else:
-                start = datetime.datetime.combine(date, taken_times[j][2]) + taken_times[j][1]
+                start = taken_times[j][2] + taken_times[j][1]
                 j += 1
                 continue
         else:
-            day["slots"].append((start.time(), end.time()))
+            day["slots"].append((start, end))
         start += block_size
     return day

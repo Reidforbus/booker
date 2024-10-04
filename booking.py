@@ -1,6 +1,8 @@
-from flask import session, render_template
+from flask import session, render_template, redirect
 import db
 import datetime
+
+weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
 def get_booking(req, id):
@@ -33,7 +35,6 @@ def get_weeks_free_slots(start_date: datetime.date, duration: datetime.timedelta
 
 
 def get_free_slots(date, duration):
-    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     day = {}
     day["weekday"] = weekdays[date.weekday()]
     day["slots"] = []
@@ -63,3 +64,19 @@ def get_free_slots(date, duration):
             day["slots"].append((start, end))
         start += block_size
     return day
+
+
+def book(req, id):
+    start, end = req.form.get("slot").split(";")
+    start = datetime.datetime.fromisoformat(start)
+    end = datetime.datetime.fromisoformat(end)
+    if not valid_booking(id, start, end):
+        return render_template("error.html", errmsg=f"{start} --- {end} is not available for booking!")
+    service = db.get_service(id)
+    if not service:
+        return render_template("error.html", errmsg=f"Service id {id} does not exist")
+    return render_template("fillbooking.html", product=service)
+
+
+def valid_booking(id, start, end):
+    return True

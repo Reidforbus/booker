@@ -1,0 +1,21 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Booking {{ product.name }}{% endblock %}
+{% block content %}
+<div>
+    <p>Booking: {{ product.name }}.</p>
+    <div
+        style="align-items: center;"
+        >
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }}€</p>
+    </div>
+</div>
+<hr>
+<div>
+    <form action="fill" method="POST">
+        <textarea id="msg" name="msg" rows="5" cols="20">Add any wishes and details here</textarea><br>
+        <input type="submit" value="Make booking"> <a href="/">Cancel</a>
+    </form>
+</div>
+{% endblock %}

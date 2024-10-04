@@ -1,4 +1,4 @@
-from flask import session, render_template, redirect
+from flask import session, render_template
 import db
 import datetime
 

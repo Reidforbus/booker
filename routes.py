@@ -1,5 +1,5 @@
 from app import app
-from db import db
+from db import db, get_services
 import register
 import login
 import booking
@@ -36,10 +36,9 @@ def error(err="There was an error"):
 
 
 @app.route("/products")
-def products():
-    query = text("SELECT * FROM service_items WHERE active=TRUE")
-    result = db.session.execute(query).fetchall()
-    return render_template("products.html", products=result)
+def routeservices():
+    services = get_services()
+    return render_template("products.html", products=services)
 
 
 @app.route("/products/<int:id>/book", methods=["GET", "POST"])

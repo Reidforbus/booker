@@ -30,6 +30,10 @@ def get_service(id):
     query = text("SELECT * FROM service_items WHERE service_id=:id")
     return db.session.execute(query, {"id": id}).fetchone()
 
+def get_services():
+    query = text("SELECT * FROM service_items WHERE active=TRUE")
+    return db.session.execute(query).fetchall()
+
 
 def get_bookings(date):
     query = text("SELECT bookings.service_id, dur, time FROM bookings JOIN service_items ON bookings.service_id = service_items.service_id WHERE day=:date ORDER BY time")

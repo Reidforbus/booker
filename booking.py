@@ -40,7 +40,7 @@ def get_free_slots(date, duration):
     day["slots"] = []
     day["date"] = date
     opening_hours = db.get_hours(date)
-    if not opening_hours:
+    if not opening_hours or date <= datetime.date.today():
         day["open"] = False
         return day
     day["open"] = True

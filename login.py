@@ -11,9 +11,10 @@ def handlelogin(req):
     result = get_user(username)
     if result is None:
         return render_template("error.html", errmsg="Username does not exist")
-    if check_password_hash(result[2], password):
+    if check_password_hash(result.pwd, password):
         session["username"] = username
         session["admin"] = result.admin
+        session["user_id"] = result.user_id
         return redirect(req.referrer)
     else:
         return render_template("error.html", errmsg="Incorrect login")

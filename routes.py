@@ -21,6 +21,7 @@ def routelogin():
 def routelogout():
     del session["username"]
     del session["admin"]
+    del session["user_id"]
     return redirect(request.referrer)
 
 

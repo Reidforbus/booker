@@ -4,7 +4,12 @@
 {% block content %}
 <div>
     <p>Booking: {{ product.name }}.</p>
-    <p>{{ product.description }}</p>
+    <div
+        style="align-items: center;"
+        >
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }}€</p>
+    </div>
 </div>
 <hr>
 <div id="week_nav" 
@@ -25,6 +30,10 @@
             {% for time in day.slots %}
             <div class="slot">
             <p>{{ time[0].strftime("%H:%M") }} - {{ time[1].strftime("%H:%M") }}</p>
+            <form action="book" method="POST">
+                <input type="hidden" value="{{ time[0] }};{{ time[1] }}" name="slot">
+                <input type="submit" value="Book">
+            </form>
             </div>
             {% endfor %}
             {% else %}

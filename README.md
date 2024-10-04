@@ -10,7 +10,7 @@ The owner/admin is able to:
 
 A user/client is able to:
 - Browse available services
-- WIP Book services and add messages to bookings
+- Book services and add messages to bookings
 - WIP Review and edit their bookings
 
 My plan is to implement this application as a bike shop service scheduler
@@ -47,8 +47,8 @@ Now you can access the site at ```localhost:5000```
 
 #### Testing the site
 
-Currently (21.09.2024) on the site you can try:
+Currently (4.10.24) on the site you can try:
 - Registering an account
 - Logging in
-    - The server won't check passwords for now so you can log in as any valid user that you register into the database
 - Browse available services
+- Make bookings at available times

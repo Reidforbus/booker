@@ -67,16 +67,41 @@ def get_free_slots(date, duration):
 
 
 def book(req, id):
-    start, end = req.form.get("slot").split(";")
+    slot = req.form.get("slot")
+    start, end = slot.split(";")
     start = datetime.datetime.fromisoformat(start)
     end = datetime.datetime.fromisoformat(end)
-    if not valid_booking(id, start, end):
+    if not valid_booking(start, end):
         return render_template("error.html", errmsg=f"{start} --- {end} is not available for booking!")
     service = db.get_service(id)
     if not service:
         return render_template("error.html", errmsg=f"Service id {id} does not exist")
-    return render_template("fillbooking.html", product=service)
+    stage = req.form.get("stage")
+    if stage == "0":
+        return render_template("fillbooking.html", product=service, slot=slot)
+    elif stage == "1":
+        msg = req.form.get("msg")
+        return render_template("confirmbooking.html", product=service, slot=slot, msg=msg)
+    elif stage == "2":
+        msg = req.form.get("msg")
+        db.make_booking(id, start, msg, session["user_id"])
+        return render_template("error.html", errmsg="Booking made succesfully")
+    return render_template("error.html", errmsg="Something went wrong here")
 
 
-def valid_booking(id, start, end):
+def valid_booking(start, end):
+    hours = db.get_hours(start.date())
+    if not hours:
+        return False
+    print("hours ok")
+    open, close = hours
+    if open > start or close < end:
+        return False
+    print("between open hours ok")
+    taken = db.get_bookings(start.date())
+    for (_, dur, time) in taken:
+        if not (end <= time or start >= time + dur):
+            print(f"Failed on {time} - {dur}")
+            return False
+    print("fits with other bookings ok")
     return True

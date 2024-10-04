@@ -43,8 +43,16 @@ def get_bookings(date):
 def get_hours(date):
     query = text("SELECT open, close FROM open_hours WHERE day=:date")
     result = db.session.execute(query, {"date": date}).fetchone()
-    if result is None:
+    if not result:
         return None
     open = datetime.datetime.combine(date, result[0])
     close = datetime.datetime.combine(date, result[1])
-    return open, close
+    return (open, close)
+
+
+def make_booking(id: int, start: datetime.datetime, msg, user):
+    bookingquery = text("INSERT INTO bookings (booking_id, service_id, time, day) VALUES (:booking_id, :service_id, :time, :day)")
+    infoquery = text("INSERT INTO booking_info (msg, user_id) VALUES (:msg, :user_id) RETURNING booking_id")
+    booking_id = db.session.execute(infoquery, {"msg": msg, "user_id": user}).fetchone()[0]
+    db.session.execute(bookingquery, {"booking_id": booking_id, "service_id": id, "time": start.time(), "day": start.date()})
+    db.session.commit()

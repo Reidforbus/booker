@@ -41,6 +41,8 @@ def products():
     return render_template("products.html", products=result)
 
 
-@app.route("/products/<int:id>/book")
+@app.route("/products/<int:id>/book", methods=["GET", "POST"])
 def routebooking(id):
-    return booking.get_booking(request, id)
+    if request.method == "GET":
+        return booking.get_booking(request, id)
+    return booking.book(request, id)

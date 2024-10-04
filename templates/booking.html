@@ -31,6 +31,7 @@
             <div class="slot">
             <p>{{ time[0].strftime("%H:%M") }} - {{ time[1].strftime("%H:%M") }}</p>
             <form action="book" method="POST">
+                <input type="hidden" value="0" name="stage">
                 <input type="hidden" value="{{ time[0] }};{{ time[1] }}" name="slot">
                 <input type="submit" value="Book">
             </form>

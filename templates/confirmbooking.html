@@ -1,0 +1,23 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Booking {{ product.name }}{% endblock %}
+{% block content %}
+<div>
+    <p>You are booking a service with the following details:</p>
+    <hr>
+    {{ product.name }}<br>
+    {{ product.description }}<br>
+    {{ product.price }}<br>
+    {{ slot }}<br>
+    <hr>
+    <p>With the following details:</p>
+    {{ msg }}
+    <hr>
+</div>
+<form action="book" method="POST">
+    <input type="hidden" name="slot" value="{{ slot }}">
+    <input type="hidden" name="msg" value="{{ msg }}">
+    <input type="hidden" name="stage" value="2">
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

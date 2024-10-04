@@ -13,8 +13,10 @@
 </div>
 <hr>
 <div>
-    <form action="fill" method="POST">
-        <textarea id="msg" name="msg" rows="5" cols="20">Add any wishes and details here</textarea><br>
+    <form action="book" method="POST">
+        <textarea id="msg" name="msg" rows="8" cols="50" placeholder="Add any wishes and details here"></textarea><br>
+        <input type="hidden" value="{{ slot }}" name="slot">
+        <input type="hidden" value="1" name="stage">
         <input type="submit" value="Make booking"> <a href="/">Cancel</a>
     </form>
 </div>

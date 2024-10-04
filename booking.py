@@ -24,7 +24,7 @@ def get_booking(req, id):
     monday = date - datetime.timedelta(days=date.weekday())
 
     free_slots = get_weeks_free_slots(monday, service[3])
-    return render_template("booking.html", product=service, dayslots=free_slots, week=date.isocalendar()[1])
+    return render_template("booking.html", service=service, dayslots=free_slots, week=date.isocalendar()[1])
 
 
 def get_weeks_free_slots(start_date: datetime.date, duration: datetime.timedelta):
@@ -78,10 +78,10 @@ def book(req, id):
         return render_template("error.html", errmsg=f"Service id {id} does not exist")
     stage = req.form.get("stage")
     if stage == "0":
-        return render_template("fillbooking.html", product=service, slot=slot)
+        return render_template("fillbooking.html", service=service, slot=slot)
     elif stage == "1":
         msg = req.form.get("msg")
-        return render_template("confirmbooking.html", product=service, slot=slot, msg=msg)
+        return render_template("confirmbooking.html", service=service, slot=slot, msg=msg)
     elif stage == "2":
         msg = req.form.get("msg")
         db.make_booking(id, start, msg, session["user_id"])

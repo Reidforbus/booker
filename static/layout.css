@@ -9,14 +9,14 @@ body {
     justify-content: space-between;
 }
 
-#products {
+#services {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2em 1em;
 
 }
 
-.product {
+.service {
     border-style: solid;
     border-width: 1px;
 }

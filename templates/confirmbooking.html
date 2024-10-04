@@ -1,13 +1,13 @@
 <!doctype html>
 {% extends "layout.html" %}
-{% block title %}Booking {{ product.name }}{% endblock %}
+{% block title %}Booking {{ service.name }}{% endblock %}
 {% block content %}
 <div>
     <p>You are booking a service with the following details:</p>
     <hr>
-    {{ product.name }}<br>
-    {{ product.description }}<br>
-    {{ product.price }}<br>
+    {{ service.name }}<br>
+    {{ service.description }}<br>
+    {{ service.price }}<br>
     {{ slot }}<br>
     <hr>
     <p>With the following details:</p>

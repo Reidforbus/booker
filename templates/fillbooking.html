@@ -1,14 +1,14 @@
 <!doctype html>
 {% extends "layout.html" %}
-{% block title %}Booking {{ product.name }}{% endblock %}
+{% block title %}Booking {{ service.name }}{% endblock %}
 {% block content %}
 <div>
-    <p>Booking: {{ product.name }}.</p>
+    <p>Booking: {{ service.name }}.</p>
     <div
         style="align-items: center;"
         >
-        <p>{{ product.description }}</p>
-        <p>{{ product.price }}€</p>
+        <p>{{ service.description }}</p>
+        <p>{{ service.price }}€</p>
     </div>
 </div>
 <hr>

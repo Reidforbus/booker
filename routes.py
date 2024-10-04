@@ -1,10 +1,9 @@
 from app import app
-from db import db, get_services
+from db import get_services
 import register
 import login
 import booking
 from flask import redirect, render_template, request, session
-from sqlalchemy.sql import text
 
 
 @app.route("/")
@@ -35,13 +34,13 @@ def error(err="There was an error"):
     return render_template("error.html", errmsg=err)
 
 
-@app.route("/products")
+@app.route("/services")
 def routeservices():
     services = get_services()
-    return render_template("products.html", products=services)
+    return render_template("services.html", services=services)
 
 
-@app.route("/products/<int:id>/book", methods=["GET", "POST"])
+@app.route("/services/<int:id>/book", methods=["GET", "POST"])
 def routebooking(id):
     if request.method == "GET":
         return booking.get_booking(request, id)

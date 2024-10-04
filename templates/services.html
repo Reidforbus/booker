@@ -2,16 +2,16 @@
 {% extends "layout.html" %}
 {% block title %}Services{% endblock %}
 {% block content %}
-<div id="products">
-    {% for product in products %}
-        <div class="product">
-            {{ product.name }}<br><br>
-            {{ product.description }}<br><br>
-            {{ product.price }}€
+<div id="services">
+    {% for service in services %}
+        <div class="service">
+            {{ service.name }}<br><br>
+            {{ service.description }}<br><br>
+            {{ service.price }}€
             {% if not session.username %}
             <p>Log in to book a service</p><br>
             {% else %}
-            <form action="products/{{ product.service_id }}/book" method="GET">
+            <form action="services/{{ service.service_id }}/book" method="GET">
                 <input type="submit" value="Book service">
             </form>
             {% endif %}

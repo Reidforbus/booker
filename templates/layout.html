@@ -1,19 +1,16 @@
 <!doctype html>
 <link rel="stylesheet" href="{{url_for("static", filename="layout.css")}}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
-<meta name="viewport" content="width=device-width, initial-scale-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
     <title>{% block title %}{% endblock %}</title>
     <h1>Late's bike service</h1>
     <div id="navbar">
-
         {% if session.admin==True %}Admin access{% endif %}
         <div id="links">
-
             {% include "links.html" %}
         </div>
         {% if request.path!="/register" %}{% include "login.html" %}{% endif %}
     </div>
-    <hr>
     {% block content %}{% endblock %}
 </body>

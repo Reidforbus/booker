@@ -1,6 +1,6 @@
 <div class="login">
 {% if session.username %}
-<p>Logged in as: {{session.username}}  <a href="/logout">Log out</a></p>
+<p>Logged in as: {{session.username}}<br><a href="/logout">Log out</a></p>
 {% else %}
 <form action="/login" method="POST">
     Username:     <input type="text" name="username">

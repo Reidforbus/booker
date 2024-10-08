@@ -1,7 +1,18 @@
 body {
-    margin: auto;
-    max-width: 80vw;
+    display: flex;
+    justify-content: stretch;
     font-family: Helvetica;
+}
+#container {
+    flex:1;
+    margin: auto;
+}
+#admintools {
+    padding-top: 15vh;
+    padding-right: 1em;
+    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
 }
 
 #navbar {

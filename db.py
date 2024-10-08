@@ -53,7 +53,7 @@ def get_bookings(date):
 
 def get_detailed_bookings(date):
     query = text(
-            "SELECT s.name, time, dur, u.name"
+            "SELECT s.name AS service, time, dur, u.name"
             + " FROM bookings AS b"
             + " JOIN service_items AS s ON b.service_id = s.service_id"
             + " JOIN booking_info AS i ON b.booking_id = i.booking_id"

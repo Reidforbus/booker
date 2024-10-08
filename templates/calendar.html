@@ -22,7 +22,10 @@
             <div class="slots">
                 {% for booking in day.slots %}
                 <div class="slot">
-                    {{ booking }}
+                    <div>{{ booking.name }}</div>
+                    <div>{{ booking.service }}</div>
+                    <div>{{ booking.time.strftime("%H:%M") }}</div>
+                    <div>{{ booking.dur }}</div>
                 </div>
                 {% endfor %}
             </div>

@@ -3,6 +3,7 @@ from db import get_services
 import register
 import login
 import booking
+import service_calendar
 from flask import redirect, render_template, request, session
 
 
@@ -21,7 +22,7 @@ def routelogout():
     del session["username"]
     del session["admin"]
     del session["user_id"]
-    return redirect(request.referrer)
+    return redirect("/")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -45,3 +46,8 @@ def routebooking(id):
     if request.method == "GET":
         return booking.get_booking(request, id)
     return booking.book(request, id)
+
+
+@app.route("/calendar")
+def routecalendar():
+    return service_calendar.get_calendar(request)

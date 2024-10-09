@@ -3,15 +3,7 @@
 {% block title %}Calendar{% endblock %}
 {% block content %}
 <div id="content">
-    <div>
-    </div>
-    <div id="week_nav" 
-        style="display:flex; justify-content:space-between;"
-        >
-        <p>prev week</p>
-        <p>Week: {{week}}</p>
-        <p>next week</p>
-    </div>
+    {% include "weeknav.html" %}
     <div id="calendar">
         {% for day in days %}
         <div class="day">

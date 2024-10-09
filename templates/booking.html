@@ -13,13 +13,7 @@
         </div>
         <hr>
     </div>
-    <div id="week_nav" 
-        style="display:flex; justify-content:space-between;"
-        >
-        <p>prev week</p>
-        <p>Week: {{week}}</p>
-        <p>next week</p>
-    </div>
+    {% include "weeknav.html" %}
     <div id="calendar">
         {% for day in dayslots %}
         <div class="day">

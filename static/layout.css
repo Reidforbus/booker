@@ -77,5 +77,8 @@ body {
     color: black;
 }
 
-a div {
+#week_nav {
+    display: flex;
+    justify-content: space-around;
 }
+

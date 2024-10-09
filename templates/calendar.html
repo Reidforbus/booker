@@ -22,12 +22,14 @@
             </div>
             <div class="slots">
                 {% for (booking, end) in day.slots %}
-                <a href="/">
-                    <div class="slot">
-                        <div>{{ booking.service }}</div>
-                        <div>{{ booking.name }}</div>
+                <a href="/" class="booking">
+                    <div>
                         <div>{{ booking.time.strftime("%H:%M") }}</div>
                         <div>{{ end.strftime("%H:%M")}}</div>
+                    </div>
+                    <div>
+                        <div>{{ booking.service }}</div>
+                        <div>{{ booking.name }}</div>
                     </div>
                 </a>
                 {% endfor %}

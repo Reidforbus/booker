@@ -16,17 +16,20 @@
         {% for day in days %}
         <div class="day">
             <div>
-                {{ day.weekday }}
+                {{ day.weekday }}<br>
+                {{ day.date.strftime("%d.%m.") }}
                 <hr>
             </div>
             <div class="slots">
-                {% for booking in day.slots %}
-                <div class="slot">
-                    <div>{{ booking.name }}</div>
-                    <div>{{ booking.service }}</div>
-                    <div>{{ booking.time.strftime("%H:%M") }}</div>
-                    <div>{{ booking.dur }}</div>
-                </div>
+                {% for (booking, end) in day.slots %}
+                <a href="/">
+                    <div class="slot">
+                        <div>{{ booking.service }}</div>
+                        <div>{{ booking.name }}</div>
+                        <div>{{ booking.time.strftime("%H:%M") }}</div>
+                        <div>{{ end.strftime("%H:%M")}}</div>
+                    </div>
+                </a>
                 {% endfor %}
             </div>
         </div>

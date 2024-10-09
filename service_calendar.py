@@ -24,6 +24,10 @@ def get_calendar(req):
         querydate = monday + datetime.timedelta(days=weekday)
         day["weekday"] = "Today" if date == querydate else weekdays[weekday]
         bookings = db.get_detailed_bookings(querydate)
-        day["slots"] = bookings
+        day["slots"] = []
+        for booking in bookings:
+            end = datetime.datetime.combine(date, booking.time) + booking.dur
+            day["slots"].append((booking, end.time()))
+        day["date"] = querydate
         days.append(day)
     return render_template("calendar.html", days=days, week=date.isocalendar()[1])

@@ -22,7 +22,7 @@ def get_calendar(req):
     for weekday in range(7):
         day = {}
         querydate = monday + datetime.timedelta(days=weekday)
-        day["weekday"] = "Today" if date == querydate else weekdays[weekday]
+        day["weekday"] = "Today" if querydate == datetime.date.today() else weekdays[weekday]
         bookings = db.get_detailed_bookings(querydate)
         day["slots"] = []
         for booking in bookings:

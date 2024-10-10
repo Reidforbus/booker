@@ -14,6 +14,7 @@
 <hr>
 <div>
     <form action="book" method="POST">
+        <input type="hidden" value="{{session.csrf_token}}" name="csrf_token">
         <textarea id="msg" name="msg" rows="8" cols="50" placeholder="Add any wishes and details here"></textarea><br>
         <input type="hidden" value="{{ slot }}" name="slot">
         <input type="hidden" value="1" name="stage">

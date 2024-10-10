@@ -30,6 +30,7 @@
                     </div>
                     <div>
                     <form action="book" method="POST">
+                        <input type="hidden" value="{{session.csrf_token}}" name="csrf_token">
                         <input type="hidden" value="0" name="stage">
                         <input type="hidden" value="{{ time[0] }};{{ time[1] }}" name="slot">
                         <input type="submit" value="Book">

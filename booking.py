@@ -67,6 +67,8 @@ def get_free_slots(date, duration):
 
 
 def book(req, id):
+    if session["csrf_token"] != req.form.get("csrf_token"):
+        return render_template("error.html", errmsg="Invalid request")
     slot = req.form.get("slot")
     start, end = slot.split(";")
     start = datetime.datetime.fromisoformat(start)

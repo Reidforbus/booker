@@ -15,6 +15,7 @@
     <hr>
 </div>
 <form action="book" method="POST">
+    <input type="hidden" value="{{session.csrf_token}}" name="csrf_token">
     <input type="hidden" name="slot" value="{{ slot }}">
     <input type="hidden" name="msg" value="{{ msg }}">
     <input type="hidden" name="stage" value="2">

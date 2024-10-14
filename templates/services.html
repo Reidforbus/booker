@@ -4,7 +4,8 @@
 {% block content %}
 <div id="services">
     {% for service in services %}
-        <div class="service">
+    <div class="service">
+        <div class="service_info">
             {{ service.name }}<br><br>
             {{ service.description }}<br><br>
             {{ service.price }}€
@@ -16,6 +17,12 @@
             </form>
             {% endif %}
         </div>
+        {% if session.admin == True %}
+        <div class="service_tools">
+            <a href="services/{{ service.service_id }}/edit">Edit</a>
+        </div>
+        {% endif %}
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

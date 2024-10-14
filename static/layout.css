@@ -31,8 +31,19 @@ body {
 }
 
 .service {
+    display: flex;
+    justify-content: space-between;
     border-style: solid;
     border-width: 1px;
+}
+
+.service_info {
+    padding: 1em;
+}
+
+.service_tools {
+    padding: 1em;
+    text-align: right;
 }
 
 #calendar {

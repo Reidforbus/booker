@@ -4,6 +4,7 @@ import register
 import login
 import booking
 import service_calendar
+import users
 from flask import redirect, render_template, request, session
 
 
@@ -22,6 +23,7 @@ def routelogout():
     del session["username"]
     del session["admin"]
     del session["user_id"]
+    del session["csrf_token"]
     return redirect("/")
 
 
@@ -51,3 +53,8 @@ def routebooking(id):
 @app.route("/calendar")
 def routecalendar():
     return service_calendar.get_calendar(request)
+
+
+@app.route("/users")
+def routeusers():
+    return users.get_users(request)

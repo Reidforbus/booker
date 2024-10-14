@@ -3,11 +3,11 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
+    <title>{% block title %}{% endblock %}</title>
     {% if session.admin==True %}
     {% include "admintools.html" %}
     {% endif %}
     <div id="container">
-        <title>{% block title %}{% endblock %}</title>
         <h1>Late's bike service</h1>
         <div id="navbar">
             <div id="links">

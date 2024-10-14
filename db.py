@@ -81,3 +81,8 @@ def make_booking(id: int, start: datetime.datetime, msg, user):
     booking_id = db.session.execute(infoquery, {"msg": msg, "user_id": user}).fetchone()[0]
     db.session.execute(bookingquery, {"booking_id": booking_id, "service_id": id, "time": start.time(), "day": start.date()})
     db.session.commit()
+
+
+def get_users():
+    query = text("SELECT name, username, admin FROM users")
+    return db.session.execute(query).fetchall()

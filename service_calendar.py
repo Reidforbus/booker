@@ -6,7 +6,7 @@ weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
 def get_calendar(req):
-    if "admin" not in session:
+    if "admin" not in session or not session["admin"]:
         return render_template("error.html", errmsg="You don't have permission to do that")
     date = req.args.get("date")
     if not date:

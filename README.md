@@ -2,7 +2,7 @@
 
 This repo holds my student project for the University of Helsinki course Tietokannat ja web-ohjelmointi
 
-My plan is to create a appointment scheduling program where a business can provide services for their customers to book appointments for.
+I have created an appointment scheduling program where a business can provide services for their customers to book appointments for.
 The owner/admin is able to:
 - WIP Create different services with a custom description and duration
 - WIP Set time windows within which services can be booked
@@ -19,7 +19,7 @@ My plan is to implement this application as a bike shop service scheduler
 
 #### Starting the project
 
-To test this project you need to have at least Python3 and Postgresql installed.
+To test this project you need to have Python3 and Postgresql installed.
 
 1. Clone the repo to your machine.
     ```bash

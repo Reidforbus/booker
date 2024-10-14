@@ -59,6 +59,18 @@ body {
     text-align: center;
 }
 
+.open {
+    border-style: solid;
+    border-width: 1px;
+    padding: .5em;
+}
+
+.close {
+    border-style: solid;
+    border-width: 1px;
+    padding: .5em;
+}
+
 .slots {
     height: 100%;
     overflow: auto;

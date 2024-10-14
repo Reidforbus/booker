@@ -12,7 +12,21 @@
                 {{ day.date.strftime("%d.%m.") }}
                 <hr>
             </div>
+            <div class="open">
+                {% if day.open %}
+                <p>Open: {{ day.open.strftime("%H:%M") }}</p>
+                {% elif day.past == True %}
+                <p>Closed for the day<p>
+                {% else %}
+                <p><a href="/">Set hours</a><p>
+                {% endif %}
+            </div>
             <div class="slots">
+                {% if day.slots == [] %}
+                <div>
+                    <p>No bookings yet</p>
+                </div>
+                {% else %}
                 {% for (booking, end) in day.slots %}
                 <a href="/" class="booking">
                     <div>
@@ -25,6 +39,16 @@
                     </div>
                 </a>
                 {% endfor %}
+                {% endif  %}
+            </div>
+            <div class="close">
+                {% if day.close %}
+                Close: {{ day.close.strftime("%H:%M") }}
+                {% elif day.past == True %}
+                Closed for the day
+                {% else %}
+                Opening hours not set yet
+                {% endif %}
             </div>
         </div>
         {% endfor %}

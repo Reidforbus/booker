@@ -28,6 +28,14 @@ def get_calendar(req):
         querydate = monday + datetime.timedelta(days=weekday)
         day["weekday"] = "Today" if querydate == datetime.date.today() else weekdays[weekday]
         bookings = db.get_detailed_bookings(querydate)
+        open_hours = db.get_hours(querydate)
+        if not open_hours:
+            day["open"] = None
+            day["close"] = None
+        else:
+            day["open"] = open_hours[0]
+            day["close"] = open_hours[1]
+        day["past"] = querydate <= datetime.date.today()
         day["slots"] = []
         for booking in bookings:
             end = datetime.datetime.combine(date, booking.time) + booking.dur

@@ -24,7 +24,10 @@ def get_booking(req, id):
     monday = date - datetime.timedelta(days=date.weekday())
 
     free_slots = get_weeks_free_slots(monday, service[3])
-    return render_template("booking.html", service=service, dayslots=free_slots, week=date.isocalendar()[1])
+    nav = {}
+    nav["lastweek"] = (monday - datetime.timedelta(weeks=1)).isoformat()
+    nav["nextweek"] = (monday + datetime.timedelta(weeks=1)).isoformat()
+    return render_template("booking.html", service=service, dayslots=free_slots, week=date.isocalendar()[1], nav=nav)
 
 
 def get_weeks_free_slots(start_date: datetime.date, duration: datetime.timedelta):

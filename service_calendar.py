@@ -18,7 +18,11 @@ def get_calendar(req):
             return render_template("error.html", errmsg="Date was not valid")
 
     monday = date - datetime.timedelta(days=date.weekday())
+    nav = {}
+    nav["lastweek"] = (monday - datetime.timedelta(weeks=1)).isoformat()
+    nav["nextweek"] = (monday + datetime.timedelta(weeks=1)).isoformat()
     days = []
+
     for weekday in range(7):
         day = {}
         querydate = monday + datetime.timedelta(days=weekday)
@@ -30,4 +34,5 @@ def get_calendar(req):
             day["slots"].append((booking, end.time()))
         day["date"] = querydate
         days.append(day)
-    return render_template("calendar.html", days=days, week=date.isocalendar()[1])
+
+    return render_template("calendar.html", days=days, week=date.isocalendar()[1], nav=nav)

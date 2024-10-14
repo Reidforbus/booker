@@ -4,6 +4,7 @@ body {
     font-family: Helvetica;
 }
 #container {
+    max-width: 80vw;
     flex:1;
     margin: auto;
 }
@@ -82,3 +83,10 @@ body {
     justify-content: space-around;
 }
 
+#week_nav a {
+    padding: 1px 6px;
+    border: 1px outset buttonborder;
+    border-radius: 3px;
+    color: buttontext;
+    text-decoration: none;
+}

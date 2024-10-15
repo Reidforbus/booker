@@ -4,7 +4,7 @@ from register import handleregister
 from booking import get_booking, book
 from users import get_users
 from service_calendar import get_calendar
-from services import get_services, edit_service
+from services import get_services, edit_service, add_service
 from flask import render_template, request
 
 
@@ -58,3 +58,8 @@ def routeusers():
 @app.route("/services/<int:id>/edit", methods=["GET", "POST"])
 def routeservicesedit(id):
     return edit_service(id, request)
+
+
+@app.route("/services/add", methods=["GET", "POST"])
+def routeserviceadd():
+    return add_service(request)

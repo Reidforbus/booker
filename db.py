@@ -107,3 +107,23 @@ def edit_service(id, details):
     else:
         db.session.rollback()
         return False
+
+
+def add_service(details):
+    insertquery = text(
+            "INSERT INTO service_items"
+            + " (name, description, price, dur)"
+            + " VALUES (:name, :desc, :price, :dur)"
+            )
+    result = db.session.execute(insertquery,
+                                {"name": details["name"],
+                                 "desc": details["desc"],
+                                 "price": details["price"],
+                                 "dur": details["dur"] + "minutes",
+                                 "id": id})
+    if result.rowcount == 1:
+        db.session.commit()
+        return True
+    else:
+        db.session.rollback()
+        return False

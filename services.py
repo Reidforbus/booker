@@ -29,7 +29,7 @@ def edit_service(id, req):
         if not valid_service(new_service):
             return render_template("error.html", errmsg="Invalid service details")
         if db.edit_service(id, new_service):
-            return redirect("/services")
+            return redirect(f"/services/{id}")
         return render_template("error.html", errmsg="Could not update service")
 
 
@@ -53,9 +53,10 @@ def add_service(req):
         new_service["dur"] = req.form.get("service_dur")
         if not valid_service(new_service):
             return render_template("error.html", errmsg="Invalid service details")
-        if db.add_service(new_service):
-            return redirect("/services")
-        return render_template("error.html", errmsg="Could not add new service")
+        new_id = db.add_service(new_service)
+        if not new_id:
+            return render_template("error.html", errmsg="Could not add new service")
+        return redirect(f"/services/{new_id}")
 
 
 def valid_service(service):

@@ -114,16 +114,17 @@ def add_service(details):
             "INSERT INTO service_items"
             + " (name, description, price, dur)"
             + " VALUES (:name, :desc, :price, :dur)"
+            + " RETURNING service_id"
             )
     result = db.session.execute(insertquery,
                                 {"name": details["name"],
                                  "desc": details["desc"],
                                  "price": details["price"],
                                  "dur": details["dur"] + "minutes",
-                                 "id": id})
-    if result.rowcount == 1:
+                                 "id": id}).fetchone()
+    if result is not None:
         db.session.commit()
-        return True
+        return result[0]
     else:
         db.session.rollback()
-        return False
+        return None

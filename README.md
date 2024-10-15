@@ -4,7 +4,7 @@ This repo holds my student project for the University of Helsinki course Tietoka
 
 I have created an appointment scheduling program where a business can provide services for their customers to book appointments for.
 The owner/admin is able to:
-- WIP Create different services with a custom description and duration
+- Create and manage different services with a custom description and duration
 - WIP Set time windows within which services can be booked
 - WIP Manage active bookings
 
@@ -47,8 +47,14 @@ Now you can access the site at ```localhost:5000```
 
 #### Testing the site
 
-Currently (4.10.24) on the site you can try:
+Currently (15.10.24) on the site you can try:
 - Registering an account
 - Logging in
-- Browse available services
-- Make bookings at available times
+- As a user:
+    - Browse available services
+    - Make bookings at available times
+- As an admin:
+    - Add new services
+    - Edit existing services
+    - View users
+    - View bookings

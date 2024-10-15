@@ -1,0 +1,30 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Edit service{% endblock %}
+{% block content %}
+<div class="content">
+    <h2>{{ service.name }}</h2>
+    <form action="edit" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <label for="service_name">Service name:
+            <input type="text" id="service_name" name="service_name" value="{{ service.name }}">
+        </label>
+        <br><br>
+        <label for="service_desc">Service description:
+            <br>
+            <textarea id="service_desc" name="service_desc" rows="8" cols="50">{{ service.description }}</textarea>
+        </label><br><br>
+        <label for="service_price">Service price: €
+            <br>
+            <input type="number" id="service_price" name="service_price" value="{{ service.price }}">
+        </label>
+        <br><br>
+        <label for="service_dur">Service duration: min
+            <br>
+            <input type="number" id="service_dur" name="service_dur" value="{{ service.dur.seconds // 60 }}">
+        </label>
+        <br><br>
+        <input type="submit" value="Save">
+    </form>
+</div>
+{% endblock %}

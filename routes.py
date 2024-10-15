@@ -1,10 +1,10 @@
 from app import app
-from db import get_services
 from login import handlelogin, handlelogout
 from register import handleregister
 from booking import get_booking, book
 from users import get_users
 from service_calendar import get_calendar
+from services import get_services, edit_service
 from flask import render_template, request
 
 
@@ -35,8 +35,7 @@ def error(err="There was an error"):
 
 @app.route("/services")
 def routeservices():
-    services = get_services()
-    return render_template("services.html", services=services)
+    return get_services(request)
 
 
 @app.route("/services/<int:id>/book", methods=["GET", "POST"])
@@ -54,3 +53,8 @@ def routecalendar():
 @app.route("/users")
 def routeusers():
     return get_users(request)
+
+
+@app.route("/services/<int:id>/edit", methods=["GET", "POST"])
+def routeservicesedit(id):
+    return edit_service(id, request)

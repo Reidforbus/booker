@@ -86,3 +86,24 @@ def make_booking(id: int, start: datetime.datetime, msg, user):
 def get_users():
     query = text("SELECT name, username, admin FROM users")
     return db.session.execute(query).fetchall()
+
+
+def edit_service(id, details):
+    updatequery = text(
+            "UPDATE service_items"
+            + " SET (name, description, price, dur)"
+            + " = (:name, :desc, :price, :dur)"
+            + " WHERE service_id = :id"
+            )
+    result = db.session.execute(updatequery,
+                                {"name": details["name"],
+                                 "desc": details["desc"],
+                                 "price": details["price"],
+                                 "dur": details["dur"] + "minutes",
+                                 "id": id})
+    if result.rowcount == 1:
+        db.session.commit()
+        return True
+    else:
+        db.session.rollback()
+        return False

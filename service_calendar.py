@@ -1,4 +1,5 @@
-from flask import render_template, session
+from flask import render_template
+from logic import is_admin
 import datetime
 import db
 
@@ -6,7 +7,7 @@ weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
 def get_calendar(req):
-    if "admin" not in session or not session["admin"]:
+    if not is_admin():
         return render_template("error.html", errmsg="You don't have permission to do that")
     date = req.args.get("date")
     if not date:

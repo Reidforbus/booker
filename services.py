@@ -7,6 +7,7 @@ def get_service(id, req):
     service = db.get_service(id)
     if not service:
         return render_template("error.html", errmsg="Could not find service")
+    return render_template("service.html", service=service)
 
 
 def edit_service(id, req):

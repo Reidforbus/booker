@@ -12,14 +12,14 @@
             {% if not session.username %}
             <p>Log in to book a service</p><br>
             {% else %}
-            <form action="services/{{ service.service_id }}/book" method="GET">
+            <form action="{{ service.service_id }}/book" method="GET">
                 <input type="submit" value="Book service">
             </form>
             {% endif %}
         </div>
         {% if session.admin == True %}
         <div class="service_tools">
-            <a href="services/{{ service.service_id }}/edit">Edit</a>
+            <a href="{{ service.service_id }}/edit">Edit</a>
         </div>
         {% endif %}
     </div>

@@ -3,7 +3,7 @@ import db
 
 
 def is_admin():
-    if session["username"]:
+    if "admin" in session:
         return session["admin"]
     return False
 
@@ -24,3 +24,7 @@ def password_valid(s):
     if s == "":
         return False, "Password cannot be empty!"
     return True, ""
+
+
+def csrf_valid(req):
+    return session["csrf_token"] != req.form.get("csrf_token")

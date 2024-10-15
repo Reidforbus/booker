@@ -20,3 +20,11 @@ def handlelogin(req):
         return redirect(req.referrer)
     else:
         return render_template("error.html", errmsg="Incorrect login")
+
+
+def handlelogout():
+    del session["username"]
+    del session["admin"]
+    del session["user_id"]
+    del session["csrf_token"]
+    return redirect("/")

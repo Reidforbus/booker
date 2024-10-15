@@ -1,11 +1,11 @@
 from app import app
 from db import get_services
-from login import handlelogin
+from login import handlelogin, handlelogout
 from register import handleregister
 from booking import get_booking, book
 from users import get_users
 from service_calendar import get_calendar
-from flask import redirect, render_template, request, session
+from flask import render_template, request
 
 
 @app.route("/")
@@ -20,11 +20,7 @@ def routelogin():
 
 @app.route("/logout")
 def routelogout():
-    del session["username"]
-    del session["admin"]
-    del session["user_id"]
-    del session["csrf_token"]
-    return redirect("/")
+    return handlelogout()
 
 
 @app.route("/register", methods=["GET", "POST"])

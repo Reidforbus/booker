@@ -1,10 +1,10 @@
 from app import app
 from db import get_services
-import register
-import login
-import booking
-import service_calendar
-import users
+from login import handlelogin
+from register import handleregister
+from booking import get_booking, book
+from users import get_users
+from service_calendar import get_calendar
 from flask import redirect, render_template, request, session
 
 
@@ -15,7 +15,7 @@ def index():
 
 @app.route("/login", methods=["POST", "GET"])
 def routelogin():
-    return login.handlelogin(request)
+    return handlelogin(request)
 
 
 @app.route("/logout")
@@ -29,7 +29,7 @@ def routelogout():
 
 @app.route("/register", methods=["GET", "POST"])
 def routeregister():
-    return register.handleregister(request)
+    return handleregister(request)
 
 
 @app.route("/error")
@@ -46,15 +46,15 @@ def routeservices():
 @app.route("/services/<int:id>/book", methods=["GET", "POST"])
 def routebooking(id):
     if request.method == "GET":
-        return booking.get_booking(request, id)
-    return booking.book(request, id)
+        return get_booking(request, id)
+    return book(request, id)
 
 
 @app.route("/calendar")
 def routecalendar():
-    return service_calendar.get_calendar(request)
+    return get_calendar(request)
 
 
 @app.route("/users")
 def routeusers():
-    return users.get_users(request)
+    return get_users(request)

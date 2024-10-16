@@ -1,7 +1,7 @@
 from flask import session, render_template
 import db
 import datetime
-from logic import csrf_valid
+from logic import csrf_invalid
 
 weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -71,7 +71,7 @@ def get_free_slots(date, duration):
 
 
 def book(req, id):
-    if csrf_valid(req):
+    if csrf_invalid(req):
         return render_template("error.html", errmsg="Invalid request")
     slot = req.form.get("slot")
     start, end = slot.split(";")

@@ -26,5 +26,5 @@ def password_valid(s):
     return True, ""
 
 
-def csrf_valid(req):
+def csrf_invalid(req):
     return session["csrf_token"] != req.form.get("csrf_token")

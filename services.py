@@ -1,5 +1,5 @@
 from flask import render_template, redirect
-from logic import is_admin, csrf_valid
+from logic import is_admin, csrf_invalid
 import db
 
 
@@ -19,7 +19,7 @@ def edit_service(id, req):
             return render_template("error.html", errmsg="Could not find service")
         return render_template("edit_service.html", service=service)
     if req.method == "POST":
-        if not csrf_valid(req):
+        if csrf_invalid(req):
             render_template("error.html", errmsg="Invalid Request")
         new_service = {}
         new_service["name"] = req.form.get("service_name")
@@ -44,7 +44,7 @@ def add_service(req):
     if req.method == "GET":
         return render_template("add_service.html")
     if req.method == "POST":
-        if not csrf_valid(req):
+        if csrf_invalid(req):
             render_template("error.html", errmsg="Invalid Request")
         new_service = {}
         new_service["name"] = req.form.get("service_name")

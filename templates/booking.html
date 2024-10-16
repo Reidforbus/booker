@@ -29,7 +29,7 @@
                     {{ time[0].strftime("%H:%M") }} - {{ time[1].strftime("%H:%M") }}
                     </div>
                     <div>
-                    <form action="book" method="POST">
+                    <form method="POST">
                         <input type="hidden" value="{{session.csrf_token}}" name="csrf_token">
                         <input type="hidden" value="0" name="stage">
                         <input type="hidden" value="{{ time[0] }};{{ time[1] }}" name="slot">

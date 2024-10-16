@@ -77,7 +77,11 @@ def get_hours(date):
 
 def set_hours(date, open, close):
     insertquery = text("INSERT INTO open_hours (open, close, day) VALUES (:open, :close, :day)")
-    result = db.session.execute(insertquery, {"open": open, "close": close, "day": date})
+    try:
+        result = db.session.execute(insertquery, {"open": open, "close": close, "day": date})
+    except:
+        return False
+
 
     if result.rowcount == 1:
         db.session.commit()

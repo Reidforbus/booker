@@ -1,7 +1,7 @@
 from flask import session, render_template
 import db
 import datetime
-from logic import csrf_invalid
+from logic import csrf_invalid, is_admin
 
 weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -111,3 +111,14 @@ def valid_booking(start, end):
             return False
     print("fits with other bookings ok")
     return True
+
+
+def view_booking(id, req):
+    booking = db.get_booking(id)
+    if not booking:
+        return render_template("error.html", errmsg="Could not find booking")
+    if "user_id" not in session:
+        return render_template("error.html", errmsg="Please log in to view bookings")
+    if not is_admin() and not booking[2] == session["user_id"]:
+        return render_template("error.html", errmsg="You are not allowed to do that")
+    return render_template("view_booking.html", booking=booking)

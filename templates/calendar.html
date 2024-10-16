@@ -28,7 +28,7 @@
                 </div>
                 {% else %}
                 {% for (booking, end) in day.slots %}
-                <a href="/" class="booking">
+                <a href="/bookings/{{booking.booking_id}}/" class="booking">
                     <div>
                         <div>{{ booking.time.strftime("%H:%M") }}</div>
                         <div>{{ end.strftime("%H:%M")}}</div>

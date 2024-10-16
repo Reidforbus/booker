@@ -1,7 +1,7 @@
 from app import app
 from login import handlelogin, handlelogout
 from register import handleregister
-from booking import get_booking, book
+from booking import get_booking, book, view_booking
 from users import get_users
 from service_calendar import get_calendar, set_hours
 from services import get_service, get_services, edit_service, add_service
@@ -73,3 +73,8 @@ def routeservicesedit(id):
 @app.route("/services/add/", methods=["GET", "POST"])
 def routeserviceadd():
     return add_service(request)
+
+
+@app.route("/bookings/<int:id>/", methods=["GET"])
+def routeviewbooking(id):
+    return view_booking(id, request)

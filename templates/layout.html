@@ -13,7 +13,7 @@
             <div id="links">
                 {% include "links.html" %}
             </div>
-            {% if request.path!="/register" %}{% include "login.html" %}{% endif %}
+            {% if request.path!="/register/" %}{% include "login.html" %}{% endif %}
         </div>
         {% block content %}{% endblock %}
     </div>

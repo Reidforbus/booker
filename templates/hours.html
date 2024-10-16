@@ -1,0 +1,19 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% block title %}Set hours - {{date.strftime("%d.%m.")}}{% endblock %}
+{% block content %}
+<div class="content">
+    <h3>Setting hours for {{date.strftime("%d.%m.")}}</h3>
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <input type="hidden" name="date" value="{{ date }}">
+        <label for="open_time">Open at:
+            <input type="time" id="open_time" name="open_time">
+        </label><br><br>
+        <label for="close_time">Close at:
+            <input type="time" id="close_time" name="close_time">
+        </label><br><br>
+        <input type="submit" value="Set">
+    </form>
+</div>
+{% endblock %}

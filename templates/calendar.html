@@ -18,7 +18,7 @@
                 {% elif day.past == True %}
                 <p>Closed for the day<p>
                 {% else %}
-                <p><a href="/">Set hours</a><p>
+                <p><a href="hours?date={{ day.date.isoformat() }}">Set hours</a><p>
                 {% endif %}
             </div>
             <div class="slots">

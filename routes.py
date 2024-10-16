@@ -3,7 +3,7 @@ from login import handlelogin, handlelogout
 from register import handleregister
 from booking import get_booking, book
 from users import get_users
-from service_calendar import get_calendar
+from service_calendar import get_calendar, set_hours
 from services import get_service, get_services, edit_service, add_service
 from flask import render_template, request
 
@@ -53,6 +53,11 @@ def routebooking(id):
 @app.route("/calendar/")
 def routecalendar():
     return get_calendar(request)
+
+
+@app.route("/calendar/hours", methods=["GET", "POST"])
+def routehours():
+    return set_hours(request)
 
 
 @app.route("/users/")

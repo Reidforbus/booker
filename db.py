@@ -75,6 +75,17 @@ def get_hours(date):
     return (open, close)
 
 
+def set_hours(date, open, close):
+    insertquery = text("INSERT INTO open_hours (open, close, day) VALUES (:open, :close, :day)")
+    result = db.session.execute(insertquery, {"open": open, "close": close, "day": date})
+
+    if result.rowcount == 1:
+        db.session.commit()
+        return True
+    db.session.rollback()
+    return False
+
+
 def make_booking(id: int, start: datetime.datetime, msg, user):
     bookingquery = text("INSERT INTO bookings (booking_id, service_id, time, day) VALUES (:booking_id, :service_id, :time, :day)")
     infoquery = text("INSERT INTO booking_info (msg, user_id) VALUES (:msg, :user_id) RETURNING booking_id")

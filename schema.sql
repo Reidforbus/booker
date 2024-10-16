@@ -25,9 +25,9 @@ CREATE TABLE service_items (
 );
 
 CREATE TABLE open_hours (
-    open TIME,
-    close TIME,
-    day DATE
+    open TIME NOT NULL,
+    close TIME NOT NULL,
+    day DATE NOT NULL UNIQUE
 );
 
 CREATE TABLE booking_info (
@@ -44,8 +44,8 @@ CREATE TABLE booking_info (
 CREATE TABLE bookings (
     booking_id INT,
     service_id INT,
-    time TIME,
-    day DATE,
+    time TIME NOT NULL,
+    day DATE NOT NULL,
 
     CONSTRAINT fk_booking
     FOREIGN KEY(booking_id)

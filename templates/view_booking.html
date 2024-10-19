@@ -2,5 +2,8 @@
 {% extends "layout.html" %}
 {% block title %}Booking {{booking.booking_id}}{% endblock %}
 {% block content %}
-{{booking.msg}}
+<h3>{{booking.service}}</h3>
+<p>{{booking.time.strftime("%H:%M")}}, {{booking.dur.seconds // 60}} min</p>
+<p>Customer: {{booking.name}}</p>
+<p>{{booking.msg}}</p>
 {% endblock %}

@@ -53,9 +53,12 @@ def get_bookings(date):
 
 def get_booking(id):
     query = text(
-            "SELECT *"
-            + " FROM booking_info AS i"
-            + " WHERE booking_id = :id"
+            "SELECT s.name AS service, time, dur, u.name, i.booking_id, msg"
+            + " FROM bookings AS b"
+            + " JOIN service_items AS s ON b.service_id = s.service_id"
+            + " JOIN booking_info AS i ON b.booking_id = i.booking_id"
+            + " JOIN users AS u ON i.user_id = u.user_id"
+            + " WHERE i.booking_id = :id"
             )
     result = db.session.execute(query, {"id": id}).fetchone()
     return result
